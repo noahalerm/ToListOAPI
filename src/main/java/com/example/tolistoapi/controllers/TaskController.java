@@ -2,10 +2,13 @@ package com.example.tolistoapi.controllers;
 
 import com.example.tolistoapi.model.entities.Task;
 import com.example.tolistoapi.model.services.TaskServices;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequiredArgsConstructor
 public class TaskController {
     //ATTRIBUTES
     private TaskServices services;
