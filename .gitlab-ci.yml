@@ -8,10 +8,6 @@ pages:
   - mkdir .public
   - cp -r * .public
   - mv .public public
-  - - apt-get update -qy
-  - apt-get install -y ruby-dev
-  - gem install dpl
-  - dpl --provider=heroku --app=gitlab-ci-python-test-prod --api-key=$HEROKU_PRODUCTION_API_KEY@git.heroku.com/tolistoapi.git
   artifacts:
     paths:
     - public
