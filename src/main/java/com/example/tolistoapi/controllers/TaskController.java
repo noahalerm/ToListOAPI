@@ -4,9 +4,12 @@ import com.example.tolistoapi.model.entities.Task;
 import com.example.tolistoapi.model.services.TaskServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -17,27 +20,36 @@ public class TaskController {
 
     //METHODS
     @GetMapping("/tasks")
-    public List<Task> listTasks(){
-        return services.listTasks();
+    public ResponseEntity<?> listTasks(){
+        List<Task> task = services.listTasks();
+        if (task == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(task);
     }
 
     @GetMapping("/tasks/{id}")
-    public Task findTask(@PathVariable Long id) {
-        return services.findTask(id);
+    public ResponseEntity<?> findTask(@PathVariable Long id) {
+        Task task = services.findTask(id);
+        if (task == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(task);
     }
 
     @PostMapping("/tasks")
-    public Task createTask(@RequestBody Task newTask){
-        return services.addTask(newTask);
+    public ResponseEntity<?> createTask(@RequestBody Task newTask){
+        Task task = services.addTask(newTask);
+        return new ResponseEntity<>(task, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/tasks/{id}")
-    public Task deleteTask(@PathVariable Long id){
-        return services.deleteTask(id);
+    public ResponseEntity<?> deleteTask(@PathVariable Long id){
+        Task task = services.deleteTask(id);
+        if (task == null) return null;
+        else return new ResponseEntity<>(task, HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/tasks")
-    public Task modifyTask(@RequestBody Task mod){
-        return services.modifyTask(mod);
+    public ResponseEntity<?> modifyTask(@RequestBody Task mod){
+        Task task = services.modifyTask(mod);
+        if (task == null) return ResponseEntity.notFound().build();
+        return new ResponseEntity<>(task, HttpStatus.OK);
     }
 }
