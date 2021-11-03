@@ -12,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskServices {
     //ATTRIBUTES
+    @Autowired
     private TaskRepository repository;
 
     //METHODS

@@ -3,6 +3,7 @@ package com.example.tolistoapi.controllers;
 import com.example.tolistoapi.model.entities.Task;
 import com.example.tolistoapi.model.services.TaskServices;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskController {
     //ATTRIBUTES
+    @Autowired
     private TaskServices services;
 
     //METHODS
