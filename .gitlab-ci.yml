@@ -1,0 +1,17 @@
+image: ubuntu:latest
+stages:
+  - deploy
+
+pages:
+  stage: deploy
+  script:
+  - mkdir .public
+  - cp -r * .public
+  - mv .public public
+  - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/tolistoapi.git
+  - git push -f heroku HEAD:master
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
