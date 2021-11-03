@@ -8,6 +8,7 @@ pages:
   - mkdir .public
   - cp -r * .public
   - mv .public public
+  - find ./src/main/resources/templates/index.html
   artifacts:
     paths:
     - public
