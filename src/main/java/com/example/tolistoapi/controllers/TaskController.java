@@ -19,35 +19,41 @@ public class TaskController {
     private TaskServices services;
 
     //METHODS
-    @GetMapping("/tasks")
-    public ResponseEntity<?> listTasks(){
-        List<Task> task = services.listTasks();
-        if (task == null) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok(task);
+    @GetMapping("/lists/{idList}/tasks")
+    public ResponseEntity<?> listTasks(@PathVariable Long idList){
+        List<Task> tasks = services.listTasks();
+
+        /*for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getIdList().getListId() != idList)
+                tasks.remove(i);
+        }*/
+
+        if (tasks == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(tasks);
     }
 
-    @GetMapping("/tasks/{id}")
-    public ResponseEntity<?> findTask(@PathVariable Long id) {
+    @GetMapping("/lists/{idList}/tasks/{id}")
+    public ResponseEntity<?> findTask(@PathVariable Long idList, Long id) {
         Task task = services.findTask(id);
         if (task == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(task);
     }
 
-    @PostMapping("/tasks")
-    public ResponseEntity<?> createTask(@RequestBody Task newTask){
+    @PostMapping("/lists/{idList}/tasks")
+    public ResponseEntity<?> createTask(@RequestBody Task newTask, @PathVariable Long idList){
         Task task = services.addTask(newTask);
         return new ResponseEntity<>(task, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/tasks/{id}")
-    public ResponseEntity<?> deleteTask(@PathVariable Long id){
+    @DeleteMapping("/lists/{idList}/tasks/{id}")
+    public ResponseEntity<?> deleteTask(@PathVariable Long idList, Long id){
         Task task = services.deleteTask(id);
         if (task == null) return ResponseEntity.notFound().build();
         else return new ResponseEntity<>(task, HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/tasks")
-    public ResponseEntity<?> modifyTask(@RequestBody Task mod){
+    @PutMapping("/lists/{idList}/tasks")
+    public ResponseEntity<?> modifyTask(@RequestBody Task mod, @PathVariable Long idList){
         Task task = services.modifyTask(mod);
         if (task == null) return ResponseEntity.notFound().build();
         return new ResponseEntity<>(task, HttpStatus.OK);

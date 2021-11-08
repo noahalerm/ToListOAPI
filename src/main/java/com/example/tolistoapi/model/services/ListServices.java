@@ -20,10 +20,6 @@ public class ListServices {
         return repository.findAll();
     }
 
-    public Llista findList(Long id){
-        return repository.findById(id).orElse(null);
-    }
-
     public Llista addList(Llista it){
         return repository.save(it);
     }

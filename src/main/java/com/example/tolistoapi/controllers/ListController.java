@@ -25,13 +25,6 @@ public class ListController {
         else return ResponseEntity.ok(list);
     }
 
-    @GetMapping("/lists/{id}")
-    public ResponseEntity<?> findList(@PathVariable Long id) {
-        Llista list = services.findList(id);
-        if (list == null) return ResponseEntity.notFound().build();
-        else return ResponseEntity.ok(list);
-    }
-
     @PostMapping("/lists")
     public ResponseEntity<?> createList(@RequestBody Llista newList){
         Llista list = services.addList(newList);
