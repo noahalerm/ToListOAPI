@@ -1,67 +1,53 @@
-What You Will Build
-You will build a service that will accept HTTP GET requests at http://localhost:8080/todolist
+# MarkTasks 
+[web a Gitlab](https://gitlab.com/MiquelOrtizGraupera/proyecto_m-13.git)
 
-It will respond with a JSON representation of a greeting, as the following listing shows:
+[web a Heroku](https://tolistoapi.herokuapp.com/)
 
-{"id":1, "descripcion":" ", "done": true/false, "position": 0 }
-You can customize the greeting with an optional name parameter in the query string, as the following listing shows:
+## Introducció  
+Com a part del projecte del M13 de DAM, volem crear una interfície web que ens permeti gestionar una o més llistes de tasques, les principals accions a realitzar amb els elements de la llista seran: marcar com a fet, afegir una tasca pendent, esborrar una tasca (feta o pendent).
 
-http://localhost:8080/greeting?name=User
-The name parameter value overrides the default value of World and is reflected in the response, as the following listing shows:
 
-{"id":1, "descripcion":" ", "done": true/false, "position": 0 }
+### Nom del projecte  
+Partint de la funcionalitat que es pretén cobrir i fent una cerca d’aplicacions similars, s'ha decidit el nom de __MarkTasks__ amb l'ús de la paraula _Tasks_ com a representant dels elements de la llista i el verb _Mark_ com acció principal a realitzar dins l'aplicació web.
 
-The service will handle GET requests for /greeting, optionally with a name parameter in the query string. The GET request should return a 200 OK response with JSON in the body that represents a greeting. It should resemble the following output:
+ ### Tipografia  
+TODO: seleccionar  
+recurs: https://fonts.google.com/
 
-{
-    "id": 1,
-    "content": "Hello, World!"
-}
-The id field is a unique identifier for the greeting, and content is the textual representation of the greeting.
 
-To model the greeting representation, create a resource representation class. To do so, provide a plain old Java object with fields, constructors, and accessors for the id and content data, as the following listing (from src/main/java/com/example/restservice/Greeting.java) shows:
+## Webgrafia i inspiració  
+- https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/App_structure
+- https://www.w3schools.com/howto/howto_js_todolist.asp
+- https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/App_structure
+- https://getbootstrap.com/docs/4.6/getting-started/introduction/#starter-template
+- https://to-do.live.com/tasks/
 
-link:complete/src/main/java/com/example/restservice/Greeting.java[]
-Note
-This application uses the Jackson JSON library to automatically marshal instances of type Greeting into JSON. Jackson is included by default by the web starter.
-Create a Resource Controller
-In Spring’s approach to building RESTful web services, HTTP requests are handled by a controller. These components are identified by the @RestController annotation, and the GreetingController shown in the following listing (from src/main/java/com/example/restservice/GreetingController.java) handles GET requests for /greeting by returning a new instance of the Greeting class:
 
-link:complete/src/main/java/com/example/restservice/GreetingController.java[]
-This controller is concise and simple, but there is plenty going on under the hood. We break it down step by step.
+## Histories d'Usuari
+### HU01 - Llistat ítems todolist
+__Com a:__ Usuari de l’aplicació via web sense autenticar  
+__Vull:__ Veure un llistat dels ítems de la meva todolist  
+__Per a:__ No oblidar què he de fer o comprar, etc  
 
-The @GetMapping annotation ensures that HTTP GET requests to /greeting are mapped to the greeting() method.
+### HU02 - Afegir ítems todolist
+__Com a:__ Usuari de l’aplicació via web sense autenticar  
+__Vull:__ Afegir ítems a la meva todolist  
+__Per a:__ Actualitzar la meva todolist i tenir centralitzats els ítems relacionats  
+__Criteris d’acceptació - DoD:__  
+- Poder escriure el nou ítem en una caixa de text de la web, donar-li a un botó afegir i la llista de todo s’actualitza amb el nou ítem.
+- Es veu en la mateixa pàgina la llista actualitz
 
-Note
-There are companion annotations for other HTTP verbs (e.g. @PostMapping for POST). There is also a @RequestMapping annotation that they all derive from, and can serve as a synonym (e.g. @RequestMapping(method=GET)).
-@RequestParam binds the value of the query string parameter name into the name parameter of the greeting() method. If the name parameter is absent in the request, the defaultValue of World is used.
+### HU03 - Marcar/desmarcar ítems todolist
+__Com a:__ Usuari de l’aplicació via web sense autenticar  
+__Vull:__ Marcar i desmarcar l’ítem de la todolist com fet  
+__Per a:__ Veure progrés a través de les feines fetes o no repetir feines  
+__Criteris d’acceptació - DoD:__  
+-Cada ítem de la todolist hauria de tenir un check (o algun mecanisme visual) per  marcar i desmarcar  
 
-The implementation of the method body creates and returns a new Greeting object with id and content attributes based on the next value from the counter and formats the given name by using the greeting template.
 
-A key difference between a traditional MVC controller and the RESTful web service controller shown earlier is the way that the HTTP response body is created. Rather than relying on a view technology to perform server-side rendering of the greeting data to HTML, this RESTful web service controller populates and returns a Greeting object. The object data will be written directly to the HTTP response as JSON.
+## Bugs:
+### Pending:
+_empty_
 
-This code uses Spring @RestController annotation, which marks the class as a controller where every method returns a domain object instead of a view. It is shorthand for including both @Controller and @ResponseBody.
-
-The Greeting object must be converted to JSON. Thanks to Spring’s HTTP message converter support, you need not do this conversion manually. Because Jackson 2 is on the classpath, Spring’s MappingJackson2HttpMessageConverter is automatically chosen to convert the Greeting instance to JSON.
-
-https://raw.githubusercontent.com/spring-guides/getting-started-macros/main/spring-boot-application-new-path.adoc
-
-https://raw.githubusercontent.com/spring-guides/getting-started-macros/main/build_an_executable_jar_subhead.adoc
-
-https://raw.githubusercontent.com/spring-guides/getting-started-macros/main/build_an_executable_jar_with_both.adoc
-
-Logging output is displayed. The service should be up and running within a few seconds.
-
-Test the Service
-Now that the service is up, visit http://localhost:8080/greeting, where you should see:
-
-{"id":1, "descripcion":" ", "done": true/false, "position": 0 }
-Provide a name query string parameter by visiting http://localhost:8080/greeting?name=User. Notice how the value of the content attribute changes from Hello, World! to Hello, User!, as the following listing shows:
-
-{"id":1, "descripcion":" ", "done": true/false, "position": 0 }
-This change demonstrates that the @RequestParam arrangement in GreetingController is working as expected. The name parameter has been given a default value of World but can be explicitly overridden through the query string.
-
-Notice also how the id attribute has changed from 1 to 2. This proves that you are working against the same GreetingController instance across multiple requests and that its counter field is being incremented on each call as expected.
-
-Summary
-Congratulations! You have just developed a RESTful web service with Spring.
+### Solved:
+  - bug01 HU3/4  Els elements afegits no es poden marcar com resolts
