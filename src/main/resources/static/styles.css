@@ -1,0 +1,215 @@
+/*NAVEGADOR*/
+#navegador{
+    width: 100%;
+    height: 150px;
+    background-color: black;
+    font-family: "BebasNeue", sans-serif;
+    color: white;
+}
+#navegador img{
+    float:left;
+    height: 150px;
+    width: 283px;
+}
+ul{
+    display: block;
+    list-style: none;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    padding-inline-start: 40px;
+}
+nav ul li{
+    font-size: 24px;
+    display: inline-block;
+    float:left;
+    margin: 25px 25px 0 25px;
+    line-height: 50px;
+    cursor: pointer;
+}
+nav ul li:first-child{
+    margin-left: 12em;
+}
+nav ul li:hover{
+    background-color: #c2b1b1;
+    box-shadow: 2px 2px 1px antiquewhite;
+    border-radius: 10px;
+    padding: 5px;
+}
+/*ASIDE*/
+#lateral{
+    width: 15%;
+    height: 100%;
+    float: left;
+    background-image: url("../img/asideBackground.jpg");
+}
+#lateral h3{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+/*ASIDE BOTON HERRAMIENTAS*/
+.toolSpace{
+    float:left;
+    width: 85%;
+    background-color: #ac75eb;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px #ac75eb;
+    border-radius: 10px;
+}
+
+.toolSpace h4{
+    display: block;
+    font-size: 25px;
+    float: right;
+    margin-top:5%;
+    transition: all 400ms;
+    margin-right: 25%;
+    text-shadow: 1px 1px 1px black;
+    overflow: hidden;
+}
+
+/*.toolSpace:hover h4{
+    animation: fromRight 300ms linear;
+}
+@keyframes fromRight {
+    from{
+        transform: translatex(100%);
+    }
+    to{
+        transform: translateX(0%);
+    }
+}*/
+/*.toolSpace:hover #gearImage{
+    animation: fromBottom 300ms linear;
+}
+@keyframes fromBottom {
+    from{
+        transform: translateY(100%);
+    }
+    to{
+        transform: translateY(0%);
+    }
+}*/
+.toolSpace #gearImage{
+    display: block;
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    margin-top: 5px;
+    animation-name: rotate-gear;
+    animation-duration:10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@keyframes rotate-gear{
+    from{
+        transform: rotateZ(0deg);
+    }
+    to{
+        transform: rotateZ(360deg);
+    }
+}
+/*FUTURA LISTA POST ONCLICK BOTON HERRAMIENTAS*/
+#lateral ul{
+    display: block;
+    float: left;
+    margin-top: 40px;
+}
+#lateral ul li{
+    display: none;
+    font-weight: bold;
+    margin: 10px;
+    color: whitesmoke;
+    background-color: #c2b1b1;
+    border-radius: 10px;
+    padding: 10px;
+}
+#lateral ul li:hover{
+    color:white;
+    background-color: black;
+    cursor: pointer;
+}
+
+/*MAIN*/
+#main{
+    width: 75%;
+    float: right;
+}
+#formDiv{
+    display: block;
+    width: 100%;
+    background-color: #c19aed;
+}
+#formDiv form{
+    display: inline-block;
+}
+form{
+    margin: 2em;
+}
+#main h2{
+    margin-top: 1em;
+    border-top: 2px dashed black;
+    border-bottom: 2px dashed black;
+    text-align: center;
+}
+
+/*STYLES PARA LISTA DE TAREAS*/
+#main li{
+    background-color: #81a7e3;
+    text-align: center;
+    font-size: 2em;
+}
+.fas {
+    visibility: hidden;
+    margin-left: 2em;
+}
+#main li:hover {
+    background-color: #c19aed;
+}
+
+#main li:hover .fas{
+    visibility: visible;
+}
+
+#main input[type=checkbox]{
+    margin-left: 1em;
+    height: 0.7em;
+    width: 0.7em;
+}
+
+/*FOOTER */
+.footer{
+    position: fixed;
+    left:0;
+    bottom:0;
+    width: 100%;
+    height: 100px;
+    background-color: #5d8fde;
+    color: white;
+    text-align: center;
+}
+.footer ul{
+    display: block;
+    width: 80%;
+    float: left;
+}
+.footer ul li{
+    display: inline-block;
+    margin-inline: 5em;
+    margin-top: 1em;
+    cursor: pointer;
+}
+.Brandlogo{
+    height: 100px;
+    width: 16%;
+    margin-left: 2px;
+    margin-top: 0;
+    display: block;
+    float: right;
+}
