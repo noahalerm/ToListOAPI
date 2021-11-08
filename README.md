@@ -17,9 +17,13 @@ Our logo has an integrated animation to attract the attention of different users
 The color scheme chosen for our website is:
 
 #5d8fde → Background
+
 #81a7e3 → Primary color light
+
 #e4e7ed → Text
+
 #ac75eb → Secondary color dark
+
 #c19aed → Secondary color light
 
 
