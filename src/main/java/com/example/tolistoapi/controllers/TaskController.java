@@ -1,5 +1,6 @@
 package com.example.tolistoapi.controllers;
 
+import com.example.tolistoapi.model.entities.Llista;
 import com.example.tolistoapi.model.entities.Task;
 import com.example.tolistoapi.model.services.TaskServices;
 import lombok.RequiredArgsConstructor;
@@ -20,13 +21,15 @@ public class TaskController {
 
     //METHODS
     @GetMapping("/lists/{idList}/tasks")
-    public ResponseEntity<?> listTasks(@PathVariable Long idList){
+    public ResponseEntity<?> listTasks(@PathVariable Llista idList){
         List<Task> tasks = services.listTasks();
 
-        /*for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getIdList().getListId() != idList)
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getIdList() != idList || tasks.get(i).getIdList() == null) {
                 tasks.remove(i);
-        }*/
+                continue;
+            }
+        }
 
         if (tasks == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(tasks);
