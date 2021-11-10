@@ -14,8 +14,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ListController {
     //ATTRIBUTES
-    @Autowired
     private ListServices services;
+
+    @Autowired
+    public ListController(ListServices services) {
+        this.services = services;
+    }
 
     //METHODS
     @GetMapping("/lists")

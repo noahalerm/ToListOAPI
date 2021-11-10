@@ -16,8 +16,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskController {
     //ATTRIBUTES
-    @Autowired
     private TaskServices services;
+
+    @Autowired
+    public TaskController(TaskServices services) {
+        this.services = services;
+    }
 
     //METHODS
     @GetMapping("/lists/{idList}/tasks")
@@ -25,7 +29,7 @@ public class TaskController {
         List<Task> tasks = services.listTasks();
 
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getIdList() != idList || tasks.get(i).getIdList() == null) {
+            if (tasks.get(i).getIdList() == null || tasks.get(i).getIdList() != idList) {
                 tasks.remove(i);
                 continue;
             }
