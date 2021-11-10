@@ -36,9 +36,9 @@ public class TaskServices {
         return aux;
     }
 
-    public Task deleteTask(Long id){
-        Task res = repository.findById(id).orElse(null);
-        if(res != null) repository.deleteById(id);
+    public Task deleteTask(Task task){
+        Task res = repository.findById(task.getId()).orElse(null);
+        if(res != null) repository.deleteById(task.getId());
         return res;
     }
 }

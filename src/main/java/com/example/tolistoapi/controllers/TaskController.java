@@ -48,7 +48,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/lists/{idList}/tasks/{id}")
-    public ResponseEntity<?> deleteTask(@PathVariable Long idList, Long id){
+    public ResponseEntity<?> deleteTask(@PathVariable Llista idList, Task id){
         Task task = services.deleteTask(id);
         if (task == null) return ResponseEntity.notFound().build();
         else return new ResponseEntity<>(task, HttpStatus.NO_CONTENT);
