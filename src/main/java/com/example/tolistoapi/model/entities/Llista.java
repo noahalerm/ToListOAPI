@@ -2,8 +2,8 @@ package com.example.tolistoapi.model.entities;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -12,4 +12,8 @@ public class Llista {
     private Long listId;
 
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idList")
+    private List<Task> tasks;
 }

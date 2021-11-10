@@ -13,9 +13,5 @@ public class Task {
     private String description;
     private Boolean done;
     private Long position;
-
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "listId")
-    private Llista idList;
+    private Long idList;
 }

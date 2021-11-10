@@ -28,12 +28,7 @@ public class TaskController {
     public ResponseEntity<?> listTasks(@PathVariable Llista idList){
         List<Task> tasks = services.listTasks();
 
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getIdList() == null || tasks.get(i).getIdList() != idList) {
-                tasks.remove(i);
-                continue;
-            }
-        }
+        //tasks = idList.getTasks();
 
         if (tasks == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(tasks);
