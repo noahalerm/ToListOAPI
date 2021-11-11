@@ -26,37 +26,41 @@ public class TaskController {
     //METHODS
     @GetMapping("/lists/{idList}/tasks")
     public ResponseEntity<?> listTasks(@PathVariable Llista idList){
-        List<Task> tasks = services.listTasks();
-
-        //tasks = idList.getTasks();
+        List<Task> tasks = idList.getTasks();
 
         if (tasks == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(tasks);
     }
 
     @GetMapping("/lists/{idList}/tasks/{id}")
-    public ResponseEntity<?> findTask(@PathVariable Long idList, Long id) {
-        Task task = services.findTask(id);
+    public ResponseEntity<?> findTask(@PathVariable Llista idList, Task id) {
+        Task task = services.findTask(id.getId());
+
         if (task == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(task);
     }
 
     @PostMapping("/lists/{idList}/tasks")
-    public ResponseEntity<?> createTask(@RequestBody Task newTask, @PathVariable Long idList){
+    public ResponseEntity<?> createTask(@RequestBody Task newTask, @PathVariable Llista idList){
+        idList.getTasks().add(newTask);
+        newTask.setIdList(idList.getListId());
         Task task = services.addTask(newTask);
+
         return new ResponseEntity<>(task, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/lists/{idList}/tasks/{id}")
     public ResponseEntity<?> deleteTask(@PathVariable Llista idList, Task id){
         Task task = services.deleteTask(id);
+
         if (task == null) return ResponseEntity.notFound().build();
         else return new ResponseEntity<>(task, HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/lists/{idList}/tasks")
-    public ResponseEntity<?> modifyTask(@RequestBody Task mod, @PathVariable Long idList){
-        Task task = services.modifyTask(mod);
+    @PutMapping("/lists/{idList}/tasks/{id}")
+    public ResponseEntity<?> modifyTask(@PathVariable Llista idList, Task id){
+        Task task = services.modifyTask(id);
+
         if (task == null) return ResponseEntity.notFound().build();
         return new ResponseEntity<>(task, HttpStatus.OK);
     }

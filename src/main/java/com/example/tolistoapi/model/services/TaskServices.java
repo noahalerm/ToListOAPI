@@ -30,8 +30,11 @@ public class TaskServices {
         return repository.save(it);
     }
 
-    public Task modifyTask(Task it){
+    public Task modifyTask(Task it) {
         Task aux = null;
+        it = repository.findById(it.getId()).orElse(null);
+        it.setDone(!it.getDone());
+
         if(repository.existsById(it.getId())) aux = repository.save(it);
         return aux;
     }
