@@ -1,8 +1,6 @@
 package com.example.tolistoapi.model.services;
 
-import com.example.tolistoapi.model.entities.Llista;
 import com.example.tolistoapi.model.entities.Task;
-import com.example.tolistoapi.model.repositories.ListRepository;
 import com.example.tolistoapi.model.repositories.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +12,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskServices {
     //ATTRIBUTES
-    @Autowired
     private TaskRepository repository;
+
+    @Autowired
+    public TaskServices(TaskRepository repository) {
+        this.repository = repository;
+    }
 
     //METHODS
     public List<Task> listTasks(){

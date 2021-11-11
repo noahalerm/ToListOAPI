@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,9 +43,14 @@ public class ListController {
         else return new ResponseEntity<>(list, HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/lists")
-    public ResponseEntity<?> modifyList(@RequestBody Llista mod){
-        Llista list = services.modifyList(mod);
+    @PutMapping("/lists/{id}")
+    public ResponseEntity<?> modifyList(@RequestBody Llista mod, @PathVariable Llista id){
+        Llista list = null;
+        mod.setTasks(id.getTasks());
+
+        if (Objects.equals(mod.getListId(), id.getListId()))
+            list = services.modifyList(mod);
+
         if (list == null) return ResponseEntity.notFound().build();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }

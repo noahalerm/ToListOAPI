@@ -12,8 +12,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ListServices {
     //ATTRIBUTES
-    @Autowired
     private ListRepository repository;
+
+    @Autowired
+    public ListServices(ListRepository repository) {
+        this.repository = repository;
+    }
 
     //METHODS
     public List<Llista> listLists() {
