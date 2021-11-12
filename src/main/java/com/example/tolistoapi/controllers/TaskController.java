@@ -18,12 +18,21 @@ public class TaskController {
     //ATTRIBUTES
     private TaskServices services;
 
+    /**
+     * TaskController Constructor
+     * @param services Task services
+     */
     @Autowired
     public TaskController(TaskServices services) {
         this.services = services;
     }
 
     //METHODS
+    /**
+     * This method is used to show all tasks from a given list.
+     * @param idList List that contains the tasks
+     * @return 404 or 200 OK
+     */
     @GetMapping("/lists/{idList}/tasks")
     public ResponseEntity<?> listTasks(@PathVariable Llista idList){
         List<Task> tasks = idList.getTasks();
@@ -32,6 +41,12 @@ public class TaskController {
         else return ResponseEntity.ok(tasks);
     }
 
+    /**
+     * This method is used to show a specific task.
+     * @param idList List that contains the task
+     * @param id Task's ID
+     * @return 404 or 200 OK
+     */
     @GetMapping("/lists/{idList}/tasks/{id}")
     public ResponseEntity<?> findTask(@PathVariable Llista idList, Task id) {
         Task task = services.findTask(id.getId());
