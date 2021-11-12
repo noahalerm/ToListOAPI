@@ -1,6 +1,7 @@
 package com.example.tolistoapi.model.services;
 
 import com.example.tolistoapi.model.entities.Llista;
+import com.example.tolistoapi.model.entities.Task;
 import com.example.tolistoapi.model.repositories.ListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,12 @@ import java.util.List;
 public class ListServices {
     //ATTRIBUTES
     private ListRepository repository;
+    private TaskServices taskServices;
 
     @Autowired
-    public ListServices(ListRepository repository) {
+    public ListServices(ListRepository repository, TaskServices services) {
         this.repository = repository;
+        this.taskServices = services;
     }
 
     //METHODS
@@ -36,6 +39,13 @@ public class ListServices {
 
     public Llista deleteList(Long id){
         Llista res = repository.findById(id).orElse(null);
+
+        List<Task> tasks = res.getTasks();
+
+        for (Task task : tasks) {
+            taskServices.deleteTask(task);
+        }
+
         if(res != null) repository.deleteById(id);
         return res;
     }
