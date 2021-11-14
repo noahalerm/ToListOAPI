@@ -30,8 +30,8 @@ public class TaskController {
     //METHODS
     /**
      * This method is used to show all tasks from a given list.
-     * @param idList List that contains the tasks
-     * @return 404 or 200 OK
+     * @param idList List that contains the tasks (LLISTA)
+     * @return 404 Not Found or 200 OK
      */
     @GetMapping("/lists/{idList}/tasks")
     public ResponseEntity<?> listTasks(@PathVariable Llista idList){
@@ -43,9 +43,9 @@ public class TaskController {
 
     /**
      * This method is used to show a specific task.
-     * @param idList List that contains the task
-     * @param id Task's ID
-     * @return 404 or 200 OK
+     * @param idList List that contains the task (LLISTA)
+     * @param id Task's ID (TASK)
+     * @return 404 Not Found or 200 OK
      */
     @GetMapping("/lists/{idList}/tasks/{id}")
     public ResponseEntity<?> findTask(@PathVariable Llista idList, Task id) {
@@ -55,15 +55,29 @@ public class TaskController {
         else return ResponseEntity.ok(task);
     }
 
+    /**
+     * This method is used to insert a new task on a given list.
+     * @param newTask New Task (TASK)
+     * @param idList List where the task will be inserted (LLISTA)
+     * @return 201 Created
+     */
     @PostMapping("/lists/{idList}/tasks")
     public ResponseEntity<?> createTask(@RequestBody Task newTask, @PathVariable Llista idList){
+        //These two lines create a connection between the list and the new task.
         idList.getTasks().add(newTask);
         newTask.setIdList(idList.getListId());
+
         Task task = services.addTask(newTask);
 
         return new ResponseEntity<>(task, HttpStatus.CREATED);
     }
 
+    /**
+     * This method is used to delete a given task.
+     * @param idList List that contains the task (LLISTA)
+     * @param id Task's ID (TASK)
+     * @return 404 Not Found or 204 No Content
+     */
     @DeleteMapping("/lists/{idList}/tasks/{id}")
     public ResponseEntity<?> deleteTask(@PathVariable Llista idList, Task id){
         Task task = services.deleteTask(id);
@@ -72,6 +86,12 @@ public class TaskController {
         else return new ResponseEntity<>(task, HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * This method is used to set a given task as done.
+     * @param idList List that contains the task (LLISTA)
+     * @param id Task's ID (TASK)
+     * @return 404 Not Found or 200 OK
+     */
     @PutMapping("/lists/{idList}/tasks/{id}")
     public ResponseEntity<?> modifyTask(@PathVariable Llista idList, Task id){
         Task task = services.modifyTask(id);

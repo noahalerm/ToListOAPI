@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class ProveController {
+public class TestController {
     private final TaskServices taskServices;
 
     @CrossOrigin(origins = "http://localhost:8080")
