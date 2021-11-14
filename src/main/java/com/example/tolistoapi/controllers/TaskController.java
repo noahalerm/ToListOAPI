@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @RestController
@@ -49,7 +50,11 @@ public class TaskController {
      */
     @GetMapping("/lists/{idList}/tasks/{id}")
     public ResponseEntity<?> findTask(@PathVariable Llista idList, Task id) {
-        Task task = services.findTask(id.getId());
+        Task task = null;
+
+        //If the task is located on the given list it is shown.
+        if (idList.getTasks().stream().anyMatch(t -> Objects.equals(t.getId(), id.getId())))
+            task = services.findTask(id.getId());
 
         if (task == null) return ResponseEntity.notFound().build();
         else return ResponseEntity.ok(task);
@@ -80,7 +85,11 @@ public class TaskController {
      */
     @DeleteMapping("/lists/{idList}/tasks/{id}")
     public ResponseEntity<?> deleteTask(@PathVariable Llista idList, Task id){
-        Task task = services.deleteTask(id);
+        Task task = null;
+
+        //If the task is located on the given list it is deleted.
+        if (idList.getTasks().stream().anyMatch(t -> Objects.equals(t.getId(), id.getId())))
+            task = services.deleteTask(id);
 
         if (task == null) return ResponseEntity.notFound().build();
         else return new ResponseEntity<>(task, HttpStatus.NO_CONTENT);
@@ -94,7 +103,11 @@ public class TaskController {
      */
     @PutMapping("/lists/{idList}/tasks/{id}")
     public ResponseEntity<?> modifyTask(@PathVariable Llista idList, Task id){
-        Task task = services.modifyTask(id);
+        Task task = null;
+
+        //If the task is located on the given list it's set as done.
+        if (idList.getTasks().stream().anyMatch(t -> Objects.equals(t.getId(), id.getId())))
+            task = services.modifyTask(id);
 
         if (task == null) return ResponseEntity.notFound().build();
         return new ResponseEntity<>(task, HttpStatus.OK);
