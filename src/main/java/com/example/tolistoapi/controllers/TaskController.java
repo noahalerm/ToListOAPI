@@ -34,6 +34,7 @@ public class TaskController {
      * @param idList List that contains the tasks (LLISTA)
      * @return 404 Not Found or 200 OK
      */
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/lists/{idList}/tasks")
     public ResponseEntity<?> listTasks(@PathVariable Llista idList){
         List<Task> tasks = idList.getTasks();
@@ -48,6 +49,7 @@ public class TaskController {
      * @param id Task's ID (TASK)
      * @return 404 Not Found or 200 OK
      */
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/lists/{idList}/tasks/{id}")
     public ResponseEntity<?> findTask(@PathVariable Llista idList, Task id) {
         Task task = null;
@@ -66,6 +68,7 @@ public class TaskController {
      * @param idList List where the task will be inserted (LLISTA)
      * @return 201 Created
      */
+    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/lists/{idList}/tasks")
     public ResponseEntity<?> createTask(@RequestBody Task newTask, @PathVariable Llista idList){
         //These two lines create a connection between the list and the new task.
@@ -83,6 +86,7 @@ public class TaskController {
      * @param id Task's ID (TASK)
      * @return 404 Not Found or 204 No Content
      */
+    @CrossOrigin(origins = "http://localhost:8080")
     @DeleteMapping("/lists/{idList}/tasks/{id}")
     public ResponseEntity<?> deleteTask(@PathVariable Llista idList, Task id){
         Task task = null;
@@ -101,6 +105,7 @@ public class TaskController {
      * @param id Task's ID (TASK)
      * @return 404 Not Found or 200 OK
      */
+    @CrossOrigin(origins = "http://localhost:8080")
     @PutMapping("/lists/{idList}/tasks/{id}")
     public ResponseEntity<?> modifyTask(@PathVariable Llista idList, Task id){
         Task task = null;
