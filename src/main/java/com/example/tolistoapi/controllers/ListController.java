@@ -31,6 +31,7 @@ public class ListController {
      * This method is used to show all lists.
      * @return 404 Not found or 200 OK
      */
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/lists")
     public ResponseEntity<?> listLists(){
         List<Llista> list = services.listLists();
@@ -44,6 +45,7 @@ public class ListController {
      * @param newList New List (LLISTA)
      * @return 201 Created
      */
+    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/lists")
     public ResponseEntity<?> createList(@RequestBody Llista newList){
         Llista list = services.addList(newList);
@@ -56,6 +58,7 @@ public class ListController {
      * @param id List's ID (LONG)
      * @return 404 Not Found or 204 No Content
      */
+    @CrossOrigin(origins = "http://localhost:8080")
     @DeleteMapping("/lists/{id}")
     public ResponseEntity<?> deleteList(@PathVariable Long id){
         Llista list = services.deleteList(id);
@@ -70,6 +73,7 @@ public class ListController {
      * @param id List's ID (LLISTA)
      * @return 404 Not Found or 200 OK
      */
+    @CrossOrigin(origins = "http://localhost:8080")
     @PutMapping("/lists/{id}")
     public ResponseEntity<?> modifyList(@RequestBody Llista mod, @PathVariable Llista id){
         Llista list = null;
