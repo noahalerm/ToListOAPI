@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 public class Llista {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long listId;
 
     //ATTRIBUTES
