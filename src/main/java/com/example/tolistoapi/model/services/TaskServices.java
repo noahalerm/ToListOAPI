@@ -76,6 +76,8 @@ public class TaskServices {
      */
     public Task modifyTaskPosition(Task it, Task pos) {
         Task aux = null;
+        it.setDescription(pos.getDescription());
+        it.setDone(pos.getDone());
         it.setPosition(pos.getPosition());
 
         //If the list exists, it's updated.
