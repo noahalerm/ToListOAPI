@@ -118,7 +118,7 @@ public class TaskController {
 
         //If the task is located on the given list it's set as done.
         if (idList.getTasks().stream().anyMatch(t -> Objects.equals(t.getId(), id.getId())))
-            task = services.modifyTaskPosition(id);
+            task = services.modifyTask(id);
 
         if (task == null) return ResponseEntity.notFound().build();
         return new ResponseEntity<>(task, HttpStatus.OK);
@@ -136,7 +136,7 @@ public class TaskController {
 
         //If the task is located on the given list it's set as done.
         if (idList.getTasks().stream().anyMatch(t -> Objects.equals(t.getId(), id.getId())))
-            task = services.modifyTask(id);
+            task = services.modifyTaskPosition(id);
 
         if (task == null) return ResponseEntity.notFound().build();
         return new ResponseEntity<>(task, HttpStatus.OK);
