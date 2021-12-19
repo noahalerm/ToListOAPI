@@ -130,13 +130,13 @@ public class TaskController {
      * @return 404 Not Found or 200 OK
      */
     @CrossOrigin(origins = "http://localhost:8080")
-    @PutMapping("/lists/{idList}/tasks")
-    public ResponseEntity<?> modifyTaskPosition(@PathVariable Llista idList, @RequestBody Task id){
+    @PutMapping("/lists/{idList}/tasks{id}")
+    public ResponseEntity<?> modifyTaskPosition(@PathVariable Llista idList, Task id, @RequestBody Task position){
         Task task = null;
 
         //If the task is located on the given list it's set as done.
         if (idList.getTasks().stream().anyMatch(t -> Objects.equals(t.getId(), id.getId())))
-            task = services.modifyTaskPosition(id);
+            task = services.modifyTaskPosition(id, position);
 
         if (task == null) return ResponseEntity.notFound().build();
         return new ResponseEntity<>(task, HttpStatus.OK);

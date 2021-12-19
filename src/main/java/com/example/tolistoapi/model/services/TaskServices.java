@@ -74,8 +74,9 @@ public class TaskServices {
      * @param it Task
      * @return updated task (Task)
      */
-    public Task modifyTaskPosition(Task it) {
+    public Task modifyTaskPosition(Task it, Task pos) {
         Task aux = null;
+        it.setPosition(pos.getPosition());
 
         //If the list exists, it's updated.
         if(repository.existsById(it.getId())) aux = repository.save(it);
