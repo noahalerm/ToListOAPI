@@ -53,7 +53,7 @@ public class TaskServices {
     }
 
     /**
-     * This method is to set a given task as done.
+     * This method is used to set a given task as done.
      * @param it Task
      * @return updated task (Task)
      */
@@ -65,6 +65,19 @@ public class TaskServices {
         it.setDone(!it.getDone());
 
         //If the task exits it is saved.
+        if(repository.existsById(it.getId())) aux = repository.save(it);
+        return aux;
+    }
+
+    /**
+     * This method is used to change a given task's position'.
+     * @param it Task
+     * @return updated task (Task)
+     */
+    public Task modifyTaskPosition(Task it) {
+        Task aux = null;
+
+        //If the list exists, it's updated.
         if(repository.existsById(it.getId())) aux = repository.save(it);
         return aux;
     }

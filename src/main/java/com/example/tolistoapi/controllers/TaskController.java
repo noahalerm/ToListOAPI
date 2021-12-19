@@ -118,6 +118,24 @@ public class TaskController {
 
         //If the task is located on the given list it's set as done.
         if (idList.getTasks().stream().anyMatch(t -> Objects.equals(t.getId(), id.getId())))
+            task = services.modifyTaskPosition(id);
+
+        if (task == null) return ResponseEntity.notFound().build();
+        return new ResponseEntity<>(task, HttpStatus.OK);
+    }
+
+    /**
+     * This method is used to change a given task's position.
+     * @param idList List that contains the task (LLISTA)
+     * @return 404 Not Found or 200 OK
+     */
+    @CrossOrigin(origins = "http://localhost:8080")
+    @PutMapping("/lists/{idList}/tasks")
+    public ResponseEntity<?> modifyTaskPosition(@PathVariable Llista idList, @RequestBody Task id){
+        Task task = null;
+
+        //If the task is located on the given list it's set as done.
+        if (idList.getTasks().stream().anyMatch(t -> Objects.equals(t.getId(), id.getId())))
             task = services.modifyTask(id);
 
         if (task == null) return ResponseEntity.notFound().build();
