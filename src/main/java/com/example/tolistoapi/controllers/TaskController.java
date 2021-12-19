@@ -92,10 +92,10 @@ public class TaskController {
         Task task = null;
 
         //POSITION UPDATE
-        for (Task t: idList.getTasks()) {
+        /*for (Task t: idList.getTasks()) {
             if (t.getPosition() > id.getPosition())
                 t.setPosition(t.getPosition()-1);
-        }
+        }*/
 
         //If the task is located on the given list it is deleted.
         if (idList.getTasks().stream().anyMatch(t -> Objects.equals(t.getId(), id.getId())))
